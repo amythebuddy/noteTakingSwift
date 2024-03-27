@@ -12,14 +12,16 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 Spacer()
-                Text("Add Task")
-                    .background(.blue)
-                    .padding(23)
-                    .frame(maxWidth: .infinity)
-                    .border(Color.black)
-                    .navigationTitle("Notes")
+                NavigationLink(destination: NewNoteView(), label: {
+                    Text("Add Task")
+                        .foregroundColor(.white)
+                        .font(.system(size: 35))
+                        .padding(20)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                })
             }
-            .padding()
+            .navigationTitle("Notes")
         }
     }
 }
