@@ -14,6 +14,7 @@ struct Note : Hashable {
 
 struct ContentView: View {
     @State private var notes: [Note] = []
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -28,7 +29,7 @@ struct ContentView: View {
                         })
                     }
                 }
-                NavigationLink(destination: NewNoteView(note: $notes), label: {
+                NavigationLink(destination: NewNoteView(notes: $notes), label: {
                     Text("Add Task")
                         .foregroundColor(.white)
                         .font(.system(size: 35))

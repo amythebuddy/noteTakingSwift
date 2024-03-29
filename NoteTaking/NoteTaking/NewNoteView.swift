@@ -10,8 +10,8 @@ import SwiftUI
 struct NewNoteView: View {
     @State var title = ""
     @State var content = ""
-    @Binding var note: [Note]
-    @State private var warning = false
+    @State var warning = false
+    @Binding var notes : [Note]
     
     var body: some View {
         NavigationView {
@@ -29,19 +29,15 @@ struct NewNoteView: View {
                     .cornerRadius(10)
                 NavigationLink(destination: ContentView(), label: {
                     Text("Add Note")
+                        .onTapGesture {
+                            addNewNote()
+                        }
                         .frame(maxWidth: 110, maxHeight: 60)
                         .foregroundColor(.white)
                         .background(.blue)
                         .cornerRadius(8)
-                        .onTapGesture {
-                            if title.isEmpty && content.isEmpty {
-                                warning = true
-                            } else {
-                                warning = false
-                            }
-                        }
                 })
-                .padding(30)
+                .padding()
                 .alert(isPresented: $warning){
                     Alert(
                         title: Text("You do not have title/content"),
@@ -54,11 +50,16 @@ struct NewNoteView: View {
         .navigationBarBackButtonHidden(true)
     }
     func addNewNote(){
-        let newNote = Note(title: title, content: content)
-        note.append(newNote)
+        if title.isEmpty && content.isEmpty {
+            warning = true
+        } else {
+            warning = false
+            var newNote = Note(title: title, content: content)
+            notes.append(newNote)
+        }
     }
 }
 
 #Preview {
-    NewNoteView(note: .constant([]))
+    NewNoteView(notes: .constant([]))
 }
