@@ -21,11 +21,11 @@ struct ContentView: View {
                 Spacer()
                 List{
                     ForEach(notes, id: \.self){ note in
-                        NavigationLink(destination: DetailNoteView(), label: {
-                            VStack{
+                        NavigationLink(destination: DetailNoteView(note: note), label: {
+                            VStack(alignment: .leading, content: {
                                 Text(note.title)
                                 Text(note.content)
-                            }
+                            })
                         })
                     }
                 }

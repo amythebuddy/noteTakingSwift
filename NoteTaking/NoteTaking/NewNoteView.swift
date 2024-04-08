@@ -29,14 +29,14 @@ struct NewNoteView: View {
                     .cornerRadius(10)
                 NavigationLink(destination: ContentView(), label: {
                     Text("Add Note")
-                        .onTapGesture {
-                            addNewNote()
-                        }
                         .frame(maxWidth: 110, maxHeight: 60)
                         .foregroundColor(.white)
                         .background(.blue)
                         .cornerRadius(8)
                 })
+                .onTapGesture {
+                    addNewNote()
+                }
                 .padding()
                 .alert(isPresented: $warning){
                     Alert(
@@ -47,14 +47,14 @@ struct NewNoteView: View {
             }
             .navigationTitle("New Note")
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(false)
     }
     func addNewNote(){
         if title.isEmpty && content.isEmpty {
             warning = true
         } else {
             warning = false
-            var newNote = Note(title: title, content: content)
+            let newNote = Note(title: title, content: content)
             notes.append(newNote)
         }
     }
