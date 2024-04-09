@@ -14,7 +14,12 @@ struct DetailNoteView: View {
         NavigationView{
             VStack{
                 Text(note.content)
+                    .padding()
+                    Spacer()
             }
+            .frame(maxWidth: 360, maxHeight: 660)
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(10)
             .navigationTitle(note.title)
         }
     }

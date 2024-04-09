@@ -33,10 +33,11 @@ struct NewNoteView: View {
                         .foregroundColor(.white)
                         .background(.blue)
                         .cornerRadius(8)
+                        .onTapGesture {
+                            addNewNote()
+                        }
                 })
-                .onTapGesture {
-                    addNewNote()
-                }
+
                 .padding()
                 .alert(isPresented: $warning){
                     Alert(
@@ -47,7 +48,6 @@ struct NewNoteView: View {
             }
             .navigationTitle("New Note")
         }
-        .navigationBarBackButtonHidden(false)
     }
     func addNewNote(){
         if title.isEmpty && content.isEmpty {
