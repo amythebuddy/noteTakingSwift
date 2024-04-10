@@ -14,43 +14,42 @@ struct NewNoteView: View {
     @Binding var notes : [Note]
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Spacer()
-                TextField("Title", text: $title)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .frame(maxWidth: 370)
-                    .cornerRadius(10)
-                TextEditor(text: $content)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .frame(maxWidth: 370)
-                    .cornerRadius(10)
-                NavigationLink(destination: ContentView(), label: {
-                    Text("Add Note")
-                        .frame(maxWidth: 110, maxHeight: 60)
-                        .foregroundColor(.white)
-                        .background(.blue)
-                        .cornerRadius(8)
-                        .onTapGesture {
-                            addNewNote()
-                        }
-                })
-
+        VStack {
+            Spacer()
+            TextField("Title", text: $title)
                 .padding()
-                .alert(isPresented: $warning){
-                    Alert(
-                        title: Text("You do not have title/content"),
-                        message: Text("Please type in title and content")
-                    )
-                }
+                .background(Color.gray.opacity(0.2))
+                .frame(maxWidth: 370)
+                .cornerRadius(10)
+            TextEditor(text: $content)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .frame(maxWidth: 370)
+                .cornerRadius(10)
+            NavigationLink(destination: ContentView(), label: {
+                Text("Add Note")
+                    .frame(maxWidth: 110, maxHeight: 60)
+                    .foregroundColor(.white)
+                    .background(.blue)
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        addNewNote()
+                    }
+            })
+
+            .padding()
+            .alert(isPresented: $warning){
+                Alert(
+                    title: Text("You do not have title/content"),
+                    message: Text("Please type in title and content")
+                )
             }
-            .navigationTitle("New Note")
         }
+        .navigationTitle("New Note")
+    
     }
     func addNewNote(){
-        if title.isEmpty && content.isEmpty {
+        if title.isEmpty && content.isEmpty { // if the user didnt input anything, alert
             warning = true
         } else {
             warning = false
