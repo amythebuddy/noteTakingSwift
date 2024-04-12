@@ -12,9 +12,9 @@ struct DetailNoteView: View {
     var note : Note
     var body: some View {
         VStack{
-            Text(note.content)
+            Text(note.content) // display content
                 .padding()
-                Spacer()
+                Spacer() // fill up the extra space
         }
         .frame(maxWidth: 360, maxHeight: 660, alignment: .leading)
         .background(Color.gray.opacity(0.2))

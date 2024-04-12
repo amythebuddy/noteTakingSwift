@@ -10,7 +10,7 @@ import SwiftUI
 struct NewNoteView: View {
     @State var title = ""
     @State var content = ""
-    @State var warning = false
+    @State var warning = false // for alerting
     @Binding var notes : [Note]
     
     var body: some View {
@@ -32,13 +32,13 @@ struct NewNoteView: View {
                     .foregroundColor(.white)
                     .background(.blue)
                     .cornerRadius(8)
-                    .onTapGesture {
+                    .onTapGesture { // this is to add a block of code.
                         addNewNote()
                     }
             })
 
             .padding()
-            .alert(isPresented: $warning){
+            .alert(isPresented: $warning){ //alert if the user doesn't input anything
                 Alert(
                     title: Text("You do not have title/content"),
                     message: Text("Please type in title and content")
@@ -53,8 +53,8 @@ struct NewNoteView: View {
             warning = true
         } else {
             warning = false
-            let newNote = Note(title: title, content: content)
-            notes.append(newNote)
+            let newNote = Note(title: title, content: content) //create a new note
+            notes.append(newNote) // append the newNote to the array notes
         }
     }
 }

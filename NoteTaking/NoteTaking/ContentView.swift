@@ -19,18 +19,18 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 Spacer()
-                List{
-                    ForEach(notes, id: \.self){ note in
+                List{ // create a list of notes
+                    ForEach(notes, id: \.self){ note in // for each note, attach a navigationLink
                         NavigationLink(destination: DetailNoteView(note: note), label: {
                             VStack(alignment: .leading, content: {
-                                Text(note.title)
+                                Text(note.title) //only display title and content
                                 Text(note.content)
                             })
                         })
                     }
                 }
-                NavigationLink(destination: NewNoteView(notes: $notes), label: {
-                    Text("Add Task")
+                NavigationLink(destination: NewNoteView(notes: $notes), label: { // go to another page to add note
+                    Text("Add Note")
                         .foregroundColor(.white)
                         .font(.system(size: 35))
                         .padding(.top, 22)
