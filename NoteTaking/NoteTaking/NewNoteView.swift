@@ -12,7 +12,7 @@ struct NewNoteView: View {
     @State var content = ""
     @State var warning = false // for alerting
     @Binding var notes : [Note]
-    
+    @Environment(\.presentationMode) var presentationMode //@Environment allows you to control the presentation mode of the current view
     var body: some View {
         VStack {
             Spacer()
@@ -55,6 +55,7 @@ struct NewNoteView: View {
             warning = false
             let newNote = Note(title: title, content: content) //create a new note
             notes.append(newNote) // append the newNote to the array notes
+            presentationMode.wrappedValue.dismiss() //dismisses the current view
         }
     }
 }

@@ -9,11 +9,16 @@ import SwiftUI
 
 
 struct DetailNoteView: View {
-    var note : Note
+    @Binding var note : Note
+    @State var content : String
+    
     var body: some View {
         VStack{
-            Text(note.content) // display content
+            TextEditor(text: $content) // display content
                 .padding()
+                .onTapGesture {
+                    editNote()
+                }
                 Spacer() // fill up the extra space
         }
         .frame(maxWidth: 360, maxHeight: 660, alignment: .leading)
@@ -21,8 +26,11 @@ struct DetailNoteView: View {
         .cornerRadius(10)
         .navigationTitle(note.title)
     }
+    func editNote(){
+        note.content = content
+    }
 }
 
 #Preview {
-    DetailNoteView(note: Note(title: "Hi", content: "Thien"))
+    DetailNoteView(note: .constant(Note(title: "hi", content: "hac")), content: "")
 }

@@ -13,18 +13,18 @@ struct Note : Hashable {
 }
 
 struct ContentView: View {
-    @State private var notes: [Note] = []
+    @State var notes: [Note] = []
     
     var body: some View {
         NavigationView {
             VStack {
                 Spacer()
                 List{ // create a list of notes
-                    ForEach(notes, id: \.self){ note in // for each note, attach a navigationLink
-                        NavigationLink(destination: DetailNoteView(note: note), label: {
+                    ForEach(notes.indices, id: \.self){ i in // for each note, attach a navigationLink
+                        NavigationLink(destination: DetailNoteView(note: $notes[i], content: notes[i].content), label: {
                             VStack(alignment: .leading, content: {
-                                Text(note.title) //only display title and content
-                                Text(note.content)
+                                Text(notes[i].title) //only display title and content
+                                Text(notes[i].content)
                             })
                         })
                     }
